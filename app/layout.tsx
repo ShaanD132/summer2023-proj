@@ -2,11 +2,13 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import {ClerkProvider} from "@clerk/nextjs"
+import { ToasterProvider } from '@/providers/toast-provider'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Marelia Online Store',
+  title: 'Marelia',
   description: 'Marelia Farm',
 }
 
@@ -19,7 +21,10 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
-          {children}
+          <ToasterProvider />
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

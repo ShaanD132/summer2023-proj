@@ -1,5 +1,4 @@
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { Navbar } from "@/components/navbar";
 
 export default function StoreLayout({
   children, params
@@ -8,14 +7,9 @@ export default function StoreLayout({
   params: {}
 }) {
 
-  const {userId} = auth();
-
-  if (!userId) {
-    redirect("/sign-in")
-  }
-
   return(
     <>
+      <Navbar />
       {children}
     </>
   )

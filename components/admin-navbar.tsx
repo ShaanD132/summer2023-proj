@@ -1,10 +1,11 @@
-import { UserButton, auth } from "@clerk/nextjs"
-import { MainNav } from "@/components/main-nav"
 import { Heading } from "@/components/ui/heading"
+import { AdminNav } from "@/components/admin-nav"
+import { UserButton, auth } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
-import { ModeToggle } from "./theme-toggle"
+import { ModeToggle } from "@/components/theme-toggle"
 
-export const Navbar = () => {
+export const AdminNavbar = () => {
+
   const {userId} = auth()
 
   if (!userId) {
@@ -16,12 +17,12 @@ export const Navbar = () => {
       <div className = "flex h-16 items-center px-4">
         <div className = "ml-2">
           <Heading
-          title = "Marelia"
+          title = "Marelia-Admin"
           description=""
           />
         </div>
 
-        <MainNav className = "mx-6"/>
+        <AdminNav className = "mx-6"/>
 
         <div className = "ml-auto flex items-center space-x-4">
           <div className="mx-3">

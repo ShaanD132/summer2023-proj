@@ -24,12 +24,12 @@ export const AdminNavbar = () => {
 
         <AdminNav className = "mx-6"/>
 
-        <div className = "ml-auto flex items-center space-x-4">
-          <div className="mx-3">
+        <div className = "ml-auto flex items-center space-x-5">
+          <div >
             <ModeToggle />
           </div>
 
-          <div className="mx-3">
+          <div>
             <UserButton afterSignOutUrl="/"/>
           </div>
         </div>

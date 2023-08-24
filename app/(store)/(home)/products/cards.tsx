@@ -32,7 +32,7 @@ export const ProductCards = async () => {
 
   return(
     <div>
-      <div className = "grid grid-cols-3 gap-y-16 w-full justify-items-center justify-center">
+      <div className = "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-16 w-full justify-items-center justify-center">
 
       {formattedProducts.map((item) => (
         <Card key = {item.id} className={cn("w-[380px]")}>

@@ -1,8 +1,12 @@
 import { UserButton, auth } from "@clerk/nextjs"
 import { MainNav } from "@/components/main-nav"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { ModeToggle } from "./theme-toggle"
 import { myFont } from "@/app/layout"
+import { Button } from "@/components/ui/button"
+import { ShoppingBasket } from "lucide-react"
+import { Router } from "next/router"
+import { CartNav } from "./cart-button"
 
 export const Navbar = () => {
   const {userId} = auth()
@@ -22,12 +26,14 @@ export const Navbar = () => {
 
         <MainNav className = "mx-6"/>
 
-        <div className = "ml-auto flex items-center space-x-4">
-          <div className="mx-3">
+        <div className = "ml-auto flex items-center space-x-5">
+          <div>
             <ModeToggle />
           </div>
 
-          <div className="mx-3">
+          <CartNav />
+
+          <div>
             <UserButton afterSignOutUrl="/"/>
           </div>
         </div>

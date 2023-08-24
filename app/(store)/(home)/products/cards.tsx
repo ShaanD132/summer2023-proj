@@ -35,7 +35,7 @@ export const ProductCards = async () => {
       <div className = "grid grid-cols-3 gap-y-16 w-full justify-items-center justify-center">
 
       {formattedProducts.map((item) => (
-        <Card className={cn("w-[380px]")}>
+        <Card key = {item.id} className={cn("w-[380px]")}>
           <CardHeader>
             <CardTitle>{item.name}</CardTitle>
             <CardDescription>

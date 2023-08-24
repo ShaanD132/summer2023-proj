@@ -1,7 +1,9 @@
+import { ProductCards } from "@/app/(store)/(home)/products/cards"
+
 const ProductsPage = () => {
   return(
-    <div className = "p-2">
-      Products Page
+    <div className = "mt-10">
+      <ProductCards />
     </div>
   )
 }

@@ -16,9 +16,26 @@ import { Separator } from "@/components/ui/separator"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
+import * as React from "react"
+import { format } from "date-fns"
+import { Calendar as CalendarIcon } from "lucide-react"
+ 
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
 const formSchema =  z.object({
   name: z.string().min(1),
-  quantity: z.string().min(1),
+  description: z.string().min(1),
+  quantity: z.number(),
+  price: z.number(),
+  deliveredAt: z.date({
+    required_error: "Delivery Date required.",
+  })
 })
 
 type ProductFormValues = z.infer<typeof formSchema>
@@ -45,7 +62,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || {name: "", quantity: ""}
+    defaultValues: initialData || {name: "", description: "", price: 0, quantity: 0, deliveredAt: new Date("2000-01-01")}
   })
 
   const onSubmit = async(data: ProductFormValues) => {
@@ -123,13 +140,80 @@ export const ProductForm: React.FC<ProductFormProps> = ({
           />
           <FormField
             control = {form.control}
+            name = "description"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+
+                <FormControl>
+                  <Input disabled = {loading} placeholder = "Product Description" {...field}/>
+                </FormControl>
+              <FormMessage/>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control = {form.control}
+            name = "price"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Price</FormLabel>
+
+                <FormControl>
+                  <Input disabled = {loading} type="number" placeholder = "Product Price"  min={0} {...field} onChange={event => field.onChange(+event.target.value)} />
+                </FormControl>
+              <FormMessage/>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control = {form.control}
             name = "quantity"
             render={({field}) => (
               <FormItem>
                 <FormLabel>Quantity</FormLabel>
 
                 <FormControl>
-                  <Input disabled = {loading} placeholder = "Product Name" {...field}/>
+                  <Input disabled = {loading} type="number" placeholder = "Product Quantity" {...field} min={0} onChange={event => field.onChange(+event.target.value)}/>
+                </FormControl>
+              <FormMessage/>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control = {form.control}
+            name = "deliveredAt"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Delivered</FormLabel><br />
+
+                <FormControl>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[280px] justify-start text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1900-01-01")
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                </Popover>
                 </FormControl>
               <FormMessage/>
               </FormItem>

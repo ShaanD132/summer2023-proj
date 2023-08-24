@@ -45,7 +45,7 @@ export async function PATCH (
     const { userId } = auth()
     const body = await req.json()
 
-    const {name, quantity} = body
+    const {name, description, price, quantity, deliveredAt} = body
 
     if (!userId) {
       return new NextResponse("Unauthenticated", {status: 401})
@@ -55,6 +55,26 @@ export async function PATCH (
       return new NextResponse("Product ID is required", {status: 400})
     }
 
+    if (!name) {
+      return new NextResponse("Name is required", {status: 403})
+    }
+
+    if (!description) {
+      return new NextResponse("Description is required", {status: 403})
+    }
+
+    if (!price) {
+      return new NextResponse("Name is required", {status: 403})
+    }
+
+    if (!quantity) {
+      return new NextResponse("Name is required", {status: 403})
+    }
+
+    if (!deliveredAt) {
+      return new NextResponse("Delivery Date is required", {status: 403})
+    }
+
     //deleteMany needed rather than delete as userId is NOT unique
     const product = await prismadb.product.updateMany({
       where: {
@@ -62,7 +82,10 @@ export async function PATCH (
       },
       data: {
         name,
-        quantity
+        description,
+        price,
+        quantity,
+        deliveredAt
       }
     })
 

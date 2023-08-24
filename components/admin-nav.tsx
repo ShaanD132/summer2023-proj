@@ -22,6 +22,11 @@ export const AdminNav = ({
       label: "Products",
       active: pathname === `/admin/products`
     },
+    {
+      href: `/admin/orders`,
+      label: "Orders",
+      active: pathname === `/admin/orders`
+    },
   ]
 
   return(

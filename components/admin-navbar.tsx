@@ -3,6 +3,7 @@ import { AdminNav } from "@/components/admin-nav"
 import { UserButton, auth } from "@clerk/nextjs"
 import { redirect } from "next/navigation"
 import { ModeToggle } from "@/components/theme-toggle"
+import { myFont } from "@/app/layout"
 
 export const AdminNavbar = () => {
 
@@ -16,10 +17,9 @@ export const AdminNavbar = () => {
     <div className = "border-b">
       <div className = "flex h-16 items-center px-4">
         <div className = "ml-2">
-          <Heading
-          title = "Marelia-Admin"
-          description=""
-          />
+          <div className = "text-2xl font-bold tracking-tight">
+            <h2 className = {myFont.className}>myStore</h2>
+          </div>
         </div>
 
         <AdminNav className = "mx-6"/>

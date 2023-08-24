@@ -17,8 +17,10 @@ const AdminProductsPage = async () => {
   const formattedProducts: ProductColumn[] = products.map((item) => ({
     id: item.id,
     name: item.name,
+    description: item.description,
+    price: item.price,
     quantity: item.quantity,
-    createdAt: format(item.createdAt, "MMMM do, yyyy"),
+    deliveredAt: format(item.deliveredAt, "MMMM do, yyyy"),
     updatedAt: format(item.updatedAt, "MMMM do, yyyy")
   }))
 

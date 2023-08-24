@@ -1,8 +1,8 @@
 import { UserButton, auth } from "@clerk/nextjs"
 import { MainNav } from "@/components/main-nav"
-import { Heading } from "@/components/ui/heading"
 import { redirect } from "next/navigation"
 import { ModeToggle } from "./theme-toggle"
+import { myFont } from "@/app/layout"
 
 export const Navbar = () => {
   const {userId} = auth()
@@ -15,10 +15,9 @@ export const Navbar = () => {
     <div className = "border-b">
       <div className = "flex h-16 items-center px-4">
         <div className = "ml-2">
-          <Heading
-          title = "Marelia"
-          description=""
-          />
+          <div className = "text-2xl font-bold tracking-tight">
+            <h2 className = {myFont.className}>myStore</h2>
+          </div>
         </div>
 
         <MainNav className = "mx-6"/>

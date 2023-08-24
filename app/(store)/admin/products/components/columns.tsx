@@ -9,9 +9,10 @@ import { ProductDropdown } from "./dropdown"
 export type ProductColumn = {
   id: string
   name: string
-  quantity: string
-  createdAt: string
-  updatedAt: string
+  description: string
+  quantity: number
+  price: number
+  deliveredAt: string
 }
 
 export const columns: ColumnDef<ProductColumn>[] = [
@@ -20,16 +21,20 @@ export const columns: ColumnDef<ProductColumn>[] = [
     header: "Name",
   },
   {
+    accessorKey: "description",
+    header: "description",
+  },
+  {
     accessorKey: "quantity",
     header: "Quantity",
   },
   {
-    accessorKey: "createdAt",
-    header: "Created",
+    accessorKey: "price",
+    header: "Price",
   },
   {
-    accessorKey: "updatedAt",
-    header: "Updated",
+    accessorKey: "deliveredAt",
+    header: "Delivered",
   },
   {
     id: "actions",

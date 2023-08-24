@@ -9,7 +9,7 @@ export async function POST(
     const {userId} = auth()
     const body = await req.json()
 
-    const {name, quantity} = body
+    const {name, description, quantity, price, deliveredAt} = body
 
     if (!userId) {
       return new NextResponse("Unauthenticated", {status: 401})
@@ -19,8 +19,16 @@ export async function POST(
       return new NextResponse("Product Name Required", {status: 400})
     }
 
+    if (!description) {
+      return new NextResponse("Description Required", {status: 400})
+    }
+
     if (!quantity) {
       return new NextResponse("Quantity Required", {status: 400})
+    }
+
+    if (!deliveredAt) {
+      return new NextResponse("Delivery Date Required", {status: 400})
     }
 
     if (userId !== "user_2UCVGbjTJN0VPcYp7dRuiGAZ1Mb") {
@@ -30,7 +38,10 @@ export async function POST(
     const product = await prismadb.product.create({
       data: {
         name,
-        quantity
+        description,
+        quantity,
+        price,
+        deliveredAt
       }
     })
 

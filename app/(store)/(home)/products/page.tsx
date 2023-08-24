@@ -1,4 +1,4 @@
-import { ProductCards } from "@/app/(store)/(home)/products/cards"
+import { ProductCards } from "./components/cards"
 
 const ProductsPage = () => {
   return(

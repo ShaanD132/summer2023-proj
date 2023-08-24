@@ -9,8 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import prismadb from "@/lib/prismadb"
-import { Button } from "@/components/ui/button"
-import {ShoppingCart} from "lucide-react"
+import { CartButton } from "./cart-btn"
 
 
 export const ProductCards = async () => {
@@ -46,10 +45,7 @@ export const ProductCards = async () => {
           <CardContent>
             <div className = "flex justify-between items-center -mt-3">
               <p>Price (HKD): ${item.price}</p>
-              <Button>
-                <ShoppingCart className = "w-4 h-4 mr-2"/>
-                Add to Cart
-              </Button>
+              <CartButton />
             </div>
           </CardContent>
           <CardFooter className = "text-muted-foreground text-sm">

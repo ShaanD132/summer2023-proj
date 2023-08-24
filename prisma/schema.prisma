@@ -17,6 +17,13 @@ model Product {
   description String
   quantity Int
   price Int
+  carts Cart[]
   deliveredAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  userId String @id
+  items Product[]
   updatedAt DateTime @updatedAt
 }
